@@ -1,0 +1,25 @@
+PARES ALEATORIOS CONTINUOS 
+define-se DENSIDADE CONDICIONAL DE X dado Y=y, fixo, com: 
+fX|Y(x|y)=f(x,y)/fY(y). fY(y)>0 
+define-se DENSIDADE CONDICIONAL DE Y dado X-x, fixo, com: 
+fY|X(y|x)=f(x,y)/fX(x). fX(x)>0 
+--- 
+CALCULO DE PROBABILDADES EM VARIAVEIS CONTINUAS 
+-P(X=<a)=F(a) 
+-P(a=<X=<b)=F(b)-F(a) 
+-P(X>a)=1-F(a) 
+-P(X=a)=0, para todo o valor de a 
+ATENCAO: em variaveis continuas 
+-P(X=<a)=P(X<a) 
+-P(a=<X=<b)=P(a<X=<b)=P(a=<X<b)=P(a<X<b) 
+-P(X>a)=P(X=>a) 
+--- 
+PROPRIEDADES DA MEDIA E DA VARIANCIA 
+sejam X e Y duas v.a. e A uma constante real 
+->E[A]=A 
+->E[AX]=A.E[X] 
+->E[X+Y]=E[X]+E[Y] 
+sejam X e Y duas v.a.INDEPENDENTES e A uma constante real 
+->var[A]=0 
+->var[AX]=A^2.var[X] 
+->var[X+Y]=var[X]+var[Y]

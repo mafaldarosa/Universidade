@@ -1,0 +1,24 @@
+VARIAVEIS QUALITATIVAS-caracteristicas nao numericas identificam uma qualidade ou uma caracteristica) 
+--ESCALA NOMINAL-dados divididos por categorias sem ordem (sexo,distristo de residencia, cor dos olhos, nacionalidade) 
+--ESCALA ORDINAL- (...)por categorias com sequência (opiniao sobre algo, estado civil, grau de escolaridade) 
+VARIAVEIS QUANTITATIVAS- caracteristicas numericas 
+--DISCRETAS- tomam um nr finito ou infinito numeravel de valores (nr de filhos, nr de pessoas q vao ao hospital por hora, nota final) 
+--CONTINUAS- (..) nr infinito nao numeravel de valores (idd, altura, peso, temperatura do ar, salario)
+
+->QUALITATIVA: 
+-Nominal- sexo, cor dos olhos 
+-Ordinal- classe social, grau de instrucao 
+->QUANTITATIVA: 
+-Continua- peso, altura, salario 
+-Discreta- nr de filhos, nr de carros
+
+
+VAR QUANTITATIVAS 
+->MEDIDAS DE POSICAO: Moda, media, mediana percentis, quartis 
+->MEDIDAS DE DISPERSAO: Amplitude, intervalo-interquartil, variancia, desvio padrao, coeficiente de variacao 
+  -Amplitude (A): A=max-min 
+-Intervalo-Interquartil (d): d=Q3-Q1 
+-coeficiente de variancia (cv): cv=s/(x tracinho) x100 por cento 
+os DADOS NUMERICOS podem ser: 
+-discretos: quando se referem a contagens ou nrs inteiros 
+-continuas: qnd podem tomar qqr valor dentro de um determinado intervalo de nrs

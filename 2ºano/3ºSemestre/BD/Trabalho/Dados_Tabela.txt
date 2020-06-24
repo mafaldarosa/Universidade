@@ -1,0 +1,149 @@
+create schema trabalho
+
+create table trabalho.especie (
+	nomee varchar(50) primary key,
+	classe varchar(50)
+);
+
+create table trabalho.animal (
+	nomea varchar(50) primary key,
+	genero varchar (50),
+	nomee varchar(50),
+	foreign key (nomee) references trabalho.especie on delete restrict
+);
+
+create table trabalho.compartimento  (
+	idcomp integer primary key,
+	tipo varchar(50)
+);
+
+
+create table trabalho.tratador(
+	ncc integer primary key,
+	nomet varchar(50),
+	salario integer,
+	nccchefe integer
+);
+create table trabalho.alojado (
+	nomea varchar(50),
+	idcomp integer,
+	primary key (nomea,idcomp),
+	foreign key  (idcomp) references trabalho.compartimento on delete restrict
+);
+create table trabalho.trata(
+	idcomp integer,
+	ncc integer,
+	primary key (idcomp,ncc),
+	foreign key (idcomp) references trabalho.compartimento on delete restrict,
+	foreign key (ncc) references trabalho.tratador on delete restrict
+);
+
+
+
+insert into trabalho.especie values ('Foca','Mamífero');
+insert into trabalho.especie values ('Leão Marinho','Mamífero');
+insert into trabalho.especie values ('Lontra','Mamífero');
+insert into trabalho.especie values ('Tigre','Mamífero');
+insert into trabalho.especie values ('Tartaruga','Réptil');
+insert into trabalho.especie values ('Lagartixa','Réptil');
+insert into trabalho.especie values ('Lagarto','Réptil');
+insert into trabalho.especie values ('Papagaio','Ave');
+insert into trabalho.especie values ('Arara','Ave');
+
+insert into trabalho.especie values ('Sapo','Anfíbio');
+insert into trabalho.especie values ('Rã','Anfíbio');
+insert into trabalho.especie values ('Golfinho','Mamífero');
+insert into trabalho.especie values ('Carpa','Peixe');
+insert into trabalho.especie values ('Sardo','Peixe');
+insert into trabalho.especie values ('Cobra','Réptil');
+insert into trabalho.especie values ('Coala','Mamífero');
+insert into trabalho.especie values ('Canguru','Mamífero');
+
+
+insert into trabalho.animal values ('Kiki','Feminino','Foca');
+insert into trabalho.animal values ('Lola','Feminino','Foca');
+insert into trabalho.animal values ('Anibal','Masculino','Leão Marinho');
+insert into trabalho.animal values ('Amália','Feminino','Lontra');
+insert into trabalho.animal values ('Eusébio','Masculino','Lontra');
+insert into trabalho.animal values ('Jau','Masculino','Tigre');
+insert into trabalho.animal values ('Princesa','Feminino','Tigre');
+insert into trabalho.animal values ('Huga','Feminino','Tartaruga');
+insert into trabalho.animal values ('Luna','Feminino','Tartaruga');
+insert into trabalho.animal values ('Brava','Feminino','Lagartixa');
+insert into trabalho.animal values ('Raul','Masculino','Lagarto');
+insert into trabalho.animal values ('Pirata','Masculino','Papagaio');
+insert into trabalho.animal values ('Bela','Feminino','Papagaio');
+insert into trabalho.animal values ('Jóia','Feminino','Arara');
+
+insert into trabalho.animal values ('Papo','Masculino','Sapo');
+insert into trabalho.animal values ('Pã','Feminino','Rã');
+insert into trabalho.animal values ('Golinho','Masculino','Golfinho');
+insert into trabalho.animal values ('Anastácia','Feminino','Golfinho');
+insert into trabalho.animal values ('Harpa','Feminino','Carpa');
+insert into trabalho.animal values ('Pardo','Masculino','Sardo');
+insert into trabalho.animal values ('Obra','Masculino','Cobra');
+insert into trabalho.animal values ('Genovéva','Feminino','Cobra');
+insert into trabalho.animal values ('Pala','Feminino','Coala');
+insert into trabalho.animal values ('Rum','Masculino','Canguru');
+
+insert into trabalho.compartimento values ('23','Charco');
+insert into trabalho.compartimento values ('10','Selva');
+insert into trabalho.compartimento values ('8','Pântano');
+insert into trabalho.compartimento values ('15','Gaiola');
+
+insert into trabalho.compartimento values ('51','Pântano');
+insert into trabalho.compartimento values ('26','Oceano');
+insert into trabalho.compartimento values ('30','Oceano');
+insert into trabalho.compartimento values ('47','Deserto');
+insert into trabalho.compartimento values ('72','Savana');
+
+insert into trabalho.tratador values ('123','Manuel','750','124');
+insert into trabalho.tratador values ('124','Luís','850','121');
+insert into trabalho.tratador values ('125','Maria','850','124');
+
+insert into trabalho.tratador values ('127','Ambrósio','750','124');
+insert into trabalho.tratador values ('128','Filipe','850','121');
+insert into trabalho.tratador values ('129','Diogo','750','128');
+insert into trabalho.tratador values ('122','Diana','850','125');
+insert into trabalho.tratador values ('121','Daniela','1000',null);
+
+insert into trabalho.alojado values ('Kiki','23');
+insert into trabalho.alojado values ('Lola','23');
+insert into trabalho.alojado values ('Anibal','23');
+insert into trabalho.alojado values ('Amália','23');
+insert into trabalho.alojado values ('Eusébio','23');
+insert into trabalho.alojado values ('Jau','10');
+insert into trabalho.alojado values ('Princesa','10');
+insert into trabalho.alojado values ('Huga','8');
+insert into trabalho.alojado values ('Luna','8');
+insert into trabalho.alojado values ('Brava','8');
+insert into trabalho.alojado values ('Raul','8');
+insert into trabalho.alojado values ('Pirata','15');
+insert into trabalho.alojado values ('Bela','15');
+insert into trabalho.alojado values ('Jóia','15');
+
+insert into trabalho.alojado values ('Papo','51');
+insert into trabalho.alojado values ('Pã','51');
+insert into trabalho.alojado values ('Golinho','26');
+insert into trabalho.alojado values ('Anastácia','26');
+insert into trabalho.alojado values ('Harpa','30');
+insert into trabalho.alojado values ('Pardo','30');
+insert into trabalho.alojado values ('Obra','47');
+insert into trabalho.alojado values ('Genovéva','47');
+insert into trabalho.alojado values ('Pala','72');
+insert into trabalho.alojado values ('Rum','72');
+
+insert into trabalho.trata values ('23','123');
+insert into trabalho.trata values ('10','123');
+insert into trabalho.trata values ('10','124');
+insert into trabalho.trata values ('8','124');
+insert into trabalho.trata values ('8','125');
+insert into trabalho.trata values ('15','125');
+
+insert into trabalho.trata values ('26','127');
+insert into trabalho.trata values ('26','122');
+insert into trabalho.trata values ('47','128');
+insert into trabalho.trata values ('47','129');
+insert into trabalho.trata values ('72','129');
+insert into trabalho.trata values ('30','122');
+insert into trabalho.trata values ('51','121');

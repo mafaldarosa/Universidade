@@ -1,0 +1,269 @@
+.data 
+S: 
+	.space 256  
+ERR:
+	.asciiz "Erro"
+PILHA: 
+
+	.ascii "Pilha:"
+	.byte 0x0a
+	.asciiz""
+
+INTRO: 
+	.ascii "*** Calculadora em notação polaca inversa ***"
+	.byte 0x0a
+	.ascii "*** Autores: Mafalda Rosa-40021, Alexandra Correia-40188 ***"
+	.byte 0x0a
+	.asciiz "*** ASC1 2017/2018 ***"
+	.byte 0x0a
+SETA:
+	.asciiz "->  "
+	
+.text
+li $v0, 4 
+la $a0, INTRO
+syscall
+jal ESTADO_PILHA
+nop
+li $v0,4
+la $a0, SETA
+syscall
+
+
+FUNÇÃO_PRINCIPAL:	
+
+	NUMEROS:
+		.text
+		la $a0, S
+		li $a1, 256
+		li $v0, 8
+		syscall
+		
+		subi $sp,$sp,40 
+		la $t1, S
+
+	LER_STRING:
+		addi $t0, $zero, 0x20
+		lb $s1, 0($t1)	
+		addi $t1, $t1, 1
+		bne $s1,$t0, LER_STRING
+		nop	
+		j ANALISE
+		nop
+
+	ANALISE:
+		lb $s1, -2($t1)
+		li $t2, 0x00000063
+		li $t3, 0x00000039
+		li $t4, 0x00000030
+		li $t5, 0x64000000
+		li $t6, 0x6f000000
+		li $t7, 0x00000000
+		ble $s1, $t4, ERROS 
+		nop
+		bge $s1, $t3, ERROS
+		nop
+		srl $s3, $s3, 8
+		beq $t2, $s3, CLEAR
+		nop
+		beq $t5, $t3, DUP
+		nop
+		beq $t6, $s3, OFF
+		nop
+		beq $t7, $s3, ENTER
+		nop
+		sub $s1, $s1, 48
+		addi $sp, $sp, -4
+		sw $s1, 4($sp)
+		#addi $t1, $t1, 2
+		j LER_STRING
+		nop
+
+
+ERROS:
+	sub $s4, $sp, 0x7fffeffc
+	addi $t1, $zero, 0x1
+	addi $t2, $zero, 0x2
+	beq $t3, $t1, Op1
+	nop
+	bge $t3, $t2, Op2
+	nop
+	jr $ra
+	nop
+
+	Op1:
+		addi $t1, $zero, 0x6e
+		or $t1, $t1, $s1
+		add $t2, $zero, 0x64
+		or $t2, $t2, $s1
+		beq $t1, $t1, NEGAÇÃO
+		nop
+		beq $t2, $s1, DUP
+		nop
+		li $v0, 4
+		la $a0, ERR
+		syscall
+		jr $ra
+		nop
+
+	Op2:
+		addi $t1, $zero, 0x2b
+		addi $t2, $zero, 0x2d
+		addi $t3, $zero, 0x2ba
+		addi $t4, $zero, 0x2bf
+		addi $t5, $zero, 0x73776170
+		beq $t1, $s1, SOMA
+		nop
+		beq $t2, $s1, SUBTRAÇÃO
+		nop
+		beq $t3, $s1, MULTIPLICAÇÃO
+		nop
+		beq $t4, $s1, DIVISÃO
+		nop
+		beq $t5, $s1, SWAP
+		nop
+		li $v0, 4
+		la $a0, ERR
+		syscall
+		jr $ra
+		nop
+
+MULTIPLICAÇÃO:
+	addi $t1, $zero, 0
+	addi $t2, $zero, 0
+	lw $t1, 0($sp)
+	lw $t2, 4($sp)
+	mul $t1, $t1, $t2
+	jal MOVE
+	nop
+	j LER_STRING
+	nop
+
+MOVE:
+	#addi $t0, $zero, 20
+	addu $t1, $zero, $zero
+	addu $t2, $zero, $zero
+	addi $t2, $sp, 8
+
+	LOOP1:
+		lw $t1, 0($sp)
+		sw $t1, -4($sp)
+		addi $t2, $t2, 4
+		addi $t0, $t0, -1
+		bne $t0, $zero LOOP1
+		nop
+		jr $ra
+		nop
+
+DIVISÃO:
+	addi $t1, $zero, 0
+	addi $t2, $zero, 0
+	lw $t1, 0($sp)
+	lw $t2, 4($sp)
+	div $t1, $t1, $t2
+	jal MOVE
+	nop
+	j LER_STRING
+	nop
+
+SOMA:
+	addi $t1, $zero, 0
+	addi $t2, $zero, 0
+	lw $t1, 0($sp)
+	lw $t2, 4($sp)
+	add $t1, $t1, $t2
+	jal MOVE
+	nop
+	j LER_STRING
+	nop
+
+SUBTRAÇÃO:
+	addi $t1, $zero, 0
+	addi $t2, $zero, 0
+	lw $t1, 0($sp)
+	lw $t2, 4($sp)
+	sub $t1, $t1, $t2
+	jal MOVE
+	nop
+	j LER_STRING
+	nop
+
+NEGAÇÃO:
+	addi $t1, $zero, 0
+	lw $t1, 0($sp)
+	sub $t1, $zero, $t1
+	jal MOVE
+	nop
+	j LER_STRING
+	nop
+
+ESTADO_PILHA:
+	li $v0, 4 
+	la $a0, PILHA
+	syscall
+	addi $t0, $zero, 0x7fffeffc
+	
+	LOOP:
+		lw $a0, 0($sp)
+		addi $v0, $zero, 1
+		li $v1, 4
+		la $a1, PILHA
+		syscall
+		bne $sp, $t0, LOOP
+		nop
+	
+		jr $ra
+		nop
+		
+DUP:
+	addi $t3, $zero, 0x7fffeffc
+	
+	LOOP3:
+		lw $t1, 36($sp)
+		sw $t2, 32($sp)
+		addi $sp, $sp, -4
+		ble $sp, $t3, LOOP3
+		nop
+		add $t1, $zero, $t2
+		j LER_STRING
+		nop
+
+CLEAR:
+	li $t1, 0x7fffeffc
+	addi, $sp, $sp, -4
+	beq $sp, $t1, LER_STRING
+	add $sp, $zero, $zero   
+	j CLEAR
+	nop
+
+DEL:
+	addi $sp, $sp, -4
+	j LER_STRING
+	nop
+
+SWAP:
+	lw $t1, 0($sp)
+	lw $t2, 4($sp)
+	sw $t2, 0($sp)
+	sw $t1, 4($sp)
+	j LER_STRING
+	nop
+	
+OFF:
+	li $t1, 0x7fffeffc
+	addi $sp, $sp, -4
+	beq $sp, $t1, FIM
+	nop
+	add $sp, $zero, $zero    
+	j OFF
+	nop
+
+ENTER:
+	j RESULTADO
+	nop
+
+RESULTADO:
+	jal ESTADO_PILHA
+	nop
+
+FIM:

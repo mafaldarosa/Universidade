@@ -1,0 +1,125 @@
+(a)
+select nomee
+from especie
+
+(b)
+select distinct classe
+from (tratador natural inner join especie natural inner join trata natural inner join animal natural inner join alojado)
+where  nomet like 'Manuel' and
+       tratador.ncc=trata.ncc and
+       trata.idcomp=alojado.idcomp and
+       alojado.nomea=animal.nomea and
+       animal.nomee=especie.nomee
+
+(c)
+Select distinct nomet
+from tratador natural inner join trata natural inner join alojado natural inner join animal natural inner join especie
+where classe like 'Réptil' and
+      tratador.nccchefe is null and
+      especie.nomee=animal.nomee and
+      animal.nomea=alojado.nomea and
+      alojado.idcomp=trata.idcomp and
+      trata.ncc=tratador.ncc
+
+(d)
+select idcomp
+from compartimento
+
+except
+select idcomp
+from compartimento natural inner join alojado natural inner join animal natural inner join especie
+where classe like 'Ave' and
+      especie.nomee=animal.nomee and
+      animal.nomea=alojado.nomea and
+      alojado.idcomp=compartimento.idcomp
+
+(e)
+select distinct idcomp
+from compartimento natural inner join alojado natural inner join animal natural inner join especie
+where classe like 'Mamífero' or 
+      classe like 'Réptil' and
+      especie.nomee=animal.nomee and
+      animal.nomea=alojado.nomea and
+      alojado.idcomp=compartimento.idcomp
+
+(f)
+select nomet
+from tratador
+
+except
+select nomet
+from tratador natural inner join trata natural inner join compartimento
+where tipo like 'Gaiola' or
+      tipo like 'Pântano' and
+      compartimento.idcomp=trata.idcomp and
+      trata.ncc=tratador.ncc
+
+(g)
+select count (classe)
+from especie
+where classe like 'Mamífero'
+
+(h)
+select (idcomp),count (idcomp)
+from animal natural inner join compartimento natural inner join alojado
+where animal.nomea=alojado.nomea and
+      alojado.idcomp=compartimento.idcomp
+group by idcomp
+
+(i)
+select (nomet),count (classe)
+from animal natural inner join especie natural inner join alojado natural inner join trata natural inner join tratador
+where especie.nomee=animal.nomee and
+      animal.nomea=alojado.nomea and
+      alojado.idcomp=trata.idcomp and
+      trata.ncc=tratador.ncc and
+      classe like 'Mamífero'
+group by nomet
+
+(j)
+select nomee
+from especie natural inner join animal natural inner join alojado
+where idcomp=8
+intersect
+select nomee
+from especie natural inner join animal natural inner join alojado
+where idcomp=10
+intersect
+select nomee
+from especie natural inner join animal natural inner join alojado
+where idcomp=15
+intersect
+select nomee
+from especie natural inner join animal natural inner join alojado
+where idcomp=23
+
+(k)
+select nomet,max(a)
+from (select count(classe) as a,nomet
+      from (especie natural inner join animal natural inner join alojado natural inner join trata natural inner join tratador)
+      where classe like 'Mamífero'
+      group by nomet) as t
+group by t.nomeT,t.a
+
+(l)
+select idcomp,max(a)
+from (select count(genero) as a,idcomp
+      from animal natural inner join alojado
+      where genero like 'Feminino'
+      group by genero,idcomp) as t
+group by t.idcomp,t.a
+
+(m)
+delete from especie where classe = ’Réptil’
+
+(n)
+select idcomp ,count(classe)
+from (especie natural inner join animal natural inner join alojado)
+where classe like 'Ave'
+group by idcomp
+
+(o)
+select sum (salario)
+from alojado natural inner join animal natural inner join compartimento natural inner join especie natural inner join trata natural inner join tratador
+where tipo like 'Charco' and classe like 'Réptil'
+

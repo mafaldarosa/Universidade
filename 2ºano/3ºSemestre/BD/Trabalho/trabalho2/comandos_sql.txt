@@ -1,0 +1,488 @@
+
+create schema trabalho;
+
+create table trabalho.aviao (
+  nomea varchar(50) primary key,
+  modelo varchar(50),
+  marca varchar(50),
+  num_lugares integer,
+  autonomia integer
+);
+
+create table trabalho.voo (
+  num_voo integer primary key ,
+  dia_semana varchar(50),
+  origem varchar(50),
+  destino varchar(50),
+  num_kms integer,
+  hora_partida integer ,
+  hora_chegada integer
+);
+
+create table trabalho.funcionarios (
+ nomef varchar(50),
+ bi integer primary key,
+ nif integer,
+ data_nascimento varchar(50)
+);
+
+create table trabalho.piloto (
+  bi integer primary key references trabalho.funcionarios(bi),
+  num_carta integer,
+  anos_experiencia_p integer,
+  foreign key (bi) references trabalho.funcionarios on delete restrict
+);
+
+create table trabalho.hospedeira (
+  bi integer primary key references trabalho.funcionarios(bi),
+  altura_h decimal ,
+  peso_h decimal ,
+  anos_experiencia_h integer,
+  foreign key (bi) references trabalho.funcionarios on delete restrict
+);
+
+create table trabalho.comissario (
+  bi integer primary key references trabalho.funcionarios(bi),
+  altura_c decimal ,
+  peso_c decimal ,
+  anos_experiencia_c integer,
+  foreign key (bi) references trabalho.funcionarios on delete restrict
+);
+
+create table trabalho.administrativo (
+  bi integer primary key references trabalho.funcionarios(bi),
+  foreign key (bi) references trabalho.funcionarios on delete restrict
+);
+
+create table trabalho.ref_c (
+  num_voo integer primary key references trabalho.voo(num_voo),
+  numc integer,
+  altura_c_min decimal,
+  foreign key (num_voo)references trabalho.voo on DELETE restrict
+);
+
+create table trabalho.ref_h (
+  num_voo integer primary key references trabalho.voo(num_voo),
+  foreign key (num_voo)references trabalho.voo on DELETE restrict ,
+  numh integer,
+  peso_h_max decimal
+);
+
+create table trabalho.ref_p (
+  num_voo integer primary key references trabalho.voo(num_voo),
+  nump integer,
+  anos_experiencia_p_min integer,
+  foreign key (num_voo)references trabalho.voo on DELETE restrict
+);
+
+create table trabalho.registo (
+  num_voo integer,
+  num_passageiros integer,
+  data_r varchar(50),
+  hora_partida_exata integer ,
+  hora_chegada_exata integer ,
+  primary key (num_voo,data_r),
+  foreign key (num_voo) references trabalho.voo on delete restrict
+);
+
+create table trabalho.trajeto (
+  num_voo integer,
+  data_t varchar(50),
+  num_trajeto integer,
+  primary key (num_voo,data_t),
+  foreign key (num_voo) references trabalho.voo on delete restrict
+);
+
+create table trabalho.tripulacao (
+  num_voo integer ,
+  bi integer ,
+  primary key (num_voo,bi) ,
+  foreign key (bi) references trabalho.funcionarios on delete restrict,
+  foreign key (num_voo) references trabalho.voo on delete restrict
+);
+
+create table trabalho.a_v (
+  nomea varchar (50),
+  num_voo integer ,
+  primary key (num_voo,nomea) ,
+  foreign key (nomea) references trabalho.aviao on delete restrict,
+  foreign key (num_voo) references trabalho.voo on delete restrict
+);
+
+create table trabalho.a_t (
+  data_t varchar (50),
+  nomea varchar (50),
+  num_voo integer ,
+  foreign key (nomea) references trabalho.aviao on delete restrict,
+  foreign key (num_voo,data_t) references trabalho.trajeto on delete restrict,
+  primary key (num_voo,data_t,nomea)
+);
+
+
+-- NOME DOS AVIOES
+insert into trabalho.aviao values ('Aleixo Abreu','737','Boeing',200,2000);
+insert into trabalho.aviao values ('Afonso Lopes','737','Boeing',200,2000);
+insert into trabalho.aviao values ('Bartolomeu Dias','737','Boeing',200,2000);
+insert into trabalho.aviao values ('Diogo Dias','777','Boeing',400,8000);
+insert into trabalho.aviao values ('Francisco Zeimoto','777','Boeing',400,8000);
+insert into trabalho.aviao values ('Gil Eanes','A318','Airbus',150,3000);
+insert into trabalho.aviao values ('Gomes de Sequeira','A318','Airbus',150,3000);
+insert into trabalho.aviao values ('Gomes Pires','A318','Airbus',150,3000);
+insert into trabalho.aviao values ('Nicolau Coelho','A380','Airbus',600,15000);
+
+-- ADMINISTRATIVOS
+insert into trabalho.funcionarios values ('Ana',1,123,'23/04/1992');
+insert into trabalho.funcionarios values ('Anabela',2,124,'30/04/1990');
+insert into trabalho.funcionarios values ('Anibal',3,126,'23/06/1982');
+insert into trabalho.funcionarios values ('José',4,127,'23/07/1989');
+insert into trabalho.funcionarios values ('João',5,128,'23/08/1993');
+insert into trabalho.funcionarios values ('Paulo',6,129,'23/09/1994');
+
+insert into trabalho.administrativo values (1);
+insert into trabalho.administrativo values (2);
+insert into trabalho.administrativo values (3);
+insert into trabalho.administrativo values (4);
+insert into trabalho.administrativo values (5);
+insert into trabalho.administrativo values (6);
+
+-- PILOTOS
+insert into trabalho.funcionarios values ('Francisco',10,435,'12/02/1965');
+insert into trabalho.funcionarios values ('Frades',11,431,'12/06/1969');
+insert into trabalho.funcionarios values ('Frederico',12,461,'12/06/1972');
+insert into trabalho.funcionarios values ('Sebastião',13,436,'13/07/1967');
+insert into trabalho.funcionarios values ('Maria',14,439,'14/06/1964');
+insert into trabalho.funcionarios values ('Rosa',15,438,'03/05/1966');
+insert into trabalho.funcionarios values ('Gertrudes',16,437,'11/04/1968');
+insert into trabalho.funcionarios values ('Filipe',17,430,'09/03/1970');
+insert into trabalho.funcionarios values ('Francisca',18,470,'04/02/1971');
+insert into trabalho.funcionarios values ('Carmo',19,471,'12/01/1971');
+
+insert into trabalho.piloto values (10,100,10);
+insert into trabalho.piloto values (11,101,10);
+insert into trabalho.piloto values (12,102,10);
+insert into trabalho.piloto values (13,103,10);
+insert into trabalho.piloto values (14,104,7);
+insert into trabalho.piloto values (15,105,7);
+insert into trabalho.piloto values (16,106,7);
+insert into trabalho.piloto values (17,107,7);
+insert into trabalho.piloto values (18,108,7);
+insert into trabalho.piloto values (19,109,7);
+
+-- HOSPEDEIRAS
+insert into trabalho.funcionarios values ('Raquel',20,560,'12/04/1989');
+insert into trabalho.funcionarios values ('Anastácia',21,561,'16/03/1988');
+insert into trabalho.funcionarios values ('Miraldina',22,562,'18/09/1990');
+insert into trabalho.funcionarios values ('Catarina',23,563,'21/06/1984');
+insert into trabalho.funcionarios values ('Cristina',24,564,'06/01/1985');
+insert into trabalho.funcionarios values ('Carolina',25,565,'31/12/1986');
+insert into trabalho.funcionarios values ('Laura',26,566,'12/02/1978');
+insert into trabalho.funcionarios values ('Patricia',27,567,'31/02/1975');
+insert into trabalho.funcionarios values ('Filipa',28,568,'25/04/1974');
+insert into trabalho.funcionarios values ('Carmen',29,569,'20/11/1978');
+insert into trabalho.funcionarios values ('Jecas',30,570,'28/10/1987');
+insert into trabalho.funcionarios values ('Jessica',31,571,'05/01/1988');
+insert into trabalho.funcionarios values ('Ines',32,576,'14/01/1991');
+insert into trabalho.funcionarios values ('Mafalda',33,573,'14/02/1989');
+insert into trabalho.funcionarios values ('Rosinda',34,579,'12/01/1983');
+
+insert into trabalho.hospedeira values (20,1.48,48,9);
+insert into trabalho.hospedeira values (21,1.41,44,10);
+insert into trabalho.hospedeira values (22,1.50,47,7);
+insert into trabalho.hospedeira values (23,1.45,56,8);
+insert into trabalho.hospedeira values (24,1.51,45,9);
+insert into trabalho.hospedeira values (25,1.60,55,10);
+insert into trabalho.hospedeira values (26,1.62,59,9);
+insert into trabalho.hospedeira values (27,1.61,60,12);
+insert into trabalho.hospedeira values (28,1.59,75,6);
+insert into trabalho.hospedeira values (29,1.58,62,7);
+insert into trabalho.hospedeira values (30,1.64,67,8);
+insert into trabalho.hospedeira values (31,1.65,52,8);
+insert into trabalho.hospedeira values (32,1.70,59,10);
+insert into trabalho.hospedeira values (33,1.73,60,11);
+insert into trabalho.hospedeira values (34,1.68,67,7);
+
+-- COMISSARIOS
+insert into trabalho.funcionarios values ('Rogério',40,600,'14/01/1983');
+insert into trabalho.funcionarios values ('Manuel',41,601,'17/02/1984');
+insert into trabalho.funcionarios values ('Miguel',42,602,'19/03/1985');
+insert into trabalho.funcionarios values ('Castro',43,603,'20/04/1986');
+insert into trabalho.funcionarios values ('Carlos',44,604,'23/05/1987');
+insert into trabalho.funcionarios values ('Portas',45,605,'09/06/1988');
+insert into trabalho.funcionarios values ('João José',46,606,'02/07/1980');
+insert into trabalho.funcionarios values ('Joaquim',47,607,'05/08/1981');
+insert into trabalho.funcionarios values ('Rodrigo',48,608,'16/09/1982');
+insert into trabalho.funcionarios values ('Maurício',49,609,'17/10/1983');
+
+insert into trabalho.comissario values (40,1.90,90,13);
+insert into trabalho.comissario values (41,1.86,96,11);
+insert into trabalho.comissario values (42,1.92,85,12);
+insert into trabalho.comissario values (43,1.89,84,10);
+insert into trabalho.comissario values (44,1.88,83,5);
+insert into trabalho.comissario values (45,2.10,120,7);
+insert into trabalho.comissario values (46,1.82,75,9);
+insert into trabalho.comissario values (47,1.80,80,11);
+insert into trabalho.comissario values (48,1.81,85,13);
+insert into trabalho.comissario values (49,1.76,90,9);
+
+--VOO 122
+insert into trabalho.voo values (122,'Sábado','Lisboa','Nova Iorque',9000,1000,1300);
+insert into trabalho.tripulacao values (122,11);
+insert into trabalho.tripulacao values (122,12);
+insert into trabalho.tripulacao values (122,21);
+insert into trabalho.tripulacao values (122,22);
+insert into trabalho.tripulacao values (122,33);
+insert into trabalho.tripulacao values (122,34);
+insert into trabalho.tripulacao values (122,48);
+insert into trabalho.tripulacao values (122,49);
+
+-- VOO 124
+insert into trabalho.voo values (124,'Sábado','Nova Iorque','Lisboa',9000,1800,2330);
+insert into trabalho.tripulacao values (124,11);
+insert into trabalho.tripulacao values (124,12);
+insert into trabalho.tripulacao values (124,22);
+insert into trabalho.tripulacao values (124,33);
+insert into trabalho.tripulacao values (124,34);
+insert into trabalho.tripulacao values (124,48);
+insert into trabalho.tripulacao values (124,49);
+
+-- VOO 125
+insert into trabalho.voo values (125,'Domingo','Lisboa','Madrid',2000,0830,1100);
+insert into trabalho.tripulacao values (125,17);
+insert into trabalho.tripulacao values (125,29);
+insert into trabalho.tripulacao values (125,22);
+insert into trabalho.tripulacao values (125,45);
+
+-- VOO 126
+insert into trabalho.voo values (126,'Domingo','Madrid','Lisboa',2000,1400,1500);
+insert into trabalho.tripulacao values (126,17);
+insert into trabalho.tripulacao values (126,29);
+insert into trabalho.tripulacao values (126,22);
+insert into trabalho.tripulacao values (126,45);
+
+-- VOO 127
+insert into trabalho.voo values (127,'Segunda','Lisboa','Paris',3500,0800,1100);
+insert into trabalho.tripulacao values (127,10);
+insert into trabalho.tripulacao values (127,14);
+insert into trabalho.tripulacao values (127,20);
+insert into trabalho.tripulacao values (127,25);
+insert into trabalho.tripulacao values (127,30);
+insert into trabalho.tripulacao values (127,31);
+insert into trabalho.tripulacao values (127,40);
+
+-- VOO 130
+insert into trabalho.voo values (130,'Segunda','Paris','Bruxelas',800,1200,1300);
+insert into trabalho.tripulacao values (130,10);
+insert into trabalho.tripulacao values (130,20);
+insert into trabalho.tripulacao values (130,25);
+
+--VOO 131
+insert into trabalho.voo values (131,'Segunda','Bruxelas','Paris',800,1400,1500);
+insert into trabalho.tripulacao values (131,10);
+insert into trabalho.tripulacao values (131,20);
+insert into trabalho.tripulacao values (131,25);
+
+--VOO 128
+insert into trabalho.voo values (128,'Segunda','Paris','Lisboa',3500,1800,2200);
+insert into trabalho.tripulacao values (128,10);
+insert into trabalho.tripulacao values (128,14);
+insert into trabalho.tripulacao values (128,20);
+insert into trabalho.tripulacao values (128,25);
+insert into trabalho.tripulacao values (128,30);
+insert into trabalho.tripulacao values (128,31);
+insert into trabalho.tripulacao values (128,40);
+
+-- Trajeto 1 127,128,130,131
+insert into trabalho.trajeto values (127,'03/01/2011',1);
+insert into trabalho.registo values (127, 310, '03/01/2011',0805, 1050);
+insert into trabalho.a_t values ('03/01/2011','Francisco Zeimoto',127);
+insert into trabalho.a_v values ('Francisco Zeimoto',127);
+
+insert into trabalho.trajeto values (130,'03/01/2011',1);
+insert into trabalho.registo values (130, 250, '03/01/2011',1200, 1300);
+insert into trabalho.a_t values ('03/01/2011','Francisco Zeimoto',130);
+insert into trabalho.a_v values ('Francisco Zeimoto',130);
+
+insert into trabalho.trajeto values (131,'03/01/2011',1);
+insert into trabalho.registo values (131, 390, '03/01/2011',1400, 1500);
+insert into trabalho.a_t values ('03/01/2011','Francisco Zeimoto',131);
+insert into trabalho.a_v values ('Francisco Zeimoto',131);
+
+insert into trabalho.trajeto values (128,'03/01/2011',1);
+insert into trabalho.registo values (128, 304, '03/01/2011',1800,2200);
+insert into trabalho.a_t values ('03/01/2011','Francisco Zeimoto',128);
+insert into trabalho.a_v values ('Francisco Zeimoto',128);
+
+insert into trabalho.ref_c values (127,1,1.66);
+insert into trabalho.ref_p values (127,2,6);
+insert into trabalho.ref_h values (127,4,69);
+
+insert into trabalho.ref_c values (130,0,0);
+insert into trabalho.ref_p values (130,1,6);
+insert into trabalho.ref_h values (130,2,69);
+
+insert into trabalho.ref_c values (131,0,0);
+insert into trabalho.ref_p values (131,1,6);
+insert into trabalho.ref_h values (131,2,69);
+
+insert into trabalho.ref_c values (128,1,1.66);
+insert into trabalho.ref_p values (128,2,6);
+insert into trabalho.ref_h values (128,4,69);
+
+-- Trajeto 2 122,124
+insert into trabalho.trajeto values (122,'01/01/2011',2);
+insert into trabalho.registo values (122, 320, '01/01/2011',1000, 1300);
+insert into trabalho.a_t values ('01/01/2011','Nicolau Coelho',122);
+insert into trabalho.a_v values ('Nicolau Coelho',122);
+
+insert into trabalho.trajeto values (124,'01/01/2011',2);
+insert into trabalho.registo values (124, 290, '01/01/2011',1800, 2330);
+insert into trabalho.a_t values ('01/01/2011','Nicolau Coelho',124);
+insert into trabalho.a_v values ('Nicolau Coelho',124);
+
+insert into trabalho.ref_c values (122,2,1.66);
+insert into trabalho.ref_p values (122,2,6);
+insert into trabalho.ref_h values (122,4,69);
+
+insert into trabalho.ref_c values (124,2,1.66);
+insert into trabalho.ref_p values (124,2,6);
+insert into trabalho.ref_h values (124,3,69);
+
+-- Trajeto 3 122,124
+insert into trabalho.trajeto values (122,'08/01/2011',3);
+insert into trabalho.registo values (122, 320, '08/01/2011',1000, 1300);
+insert into trabalho.a_t values ('08/01/2011','Nicolau Coelho',122);
+
+
+insert into trabalho.trajeto values (124,'08/01/2011',2);
+insert into trabalho.registo values (124, 290, '08/01/2011',1800, 2330);
+insert into trabalho.a_t values ('08/01/2011','Nicolau Coelho',124);
+
+
+insert into trabalho.ref_c values (122,2,1.66);
+insert into trabalho.ref_p values (122,2,6);
+insert into trabalho.ref_h values (122,4,69);
+
+insert into trabalho.ref_c values (124,2,1.66);
+insert into trabalho.ref_p values (124,2,6);
+insert into trabalho.ref_h values (124,3,69);
+
+
+
+-- Trajeto 4 127,128,130,131
+insert into trabalho.trajeto values (127,'10/01/2011',4);
+insert into trabalho.registo values (127, 310, '10/01/2011',0805, 1050);
+insert into trabalho.a_t values ('10/01/2011','Francisco Zeimoto',127);
+
+
+insert into trabalho.trajeto values (130,'10/01/2011',4);
+insert into trabalho.registo values (130, 250, '10/01/2011',1200, 1300);
+insert into trabalho.a_t values ('10/01/2011','Francisco Zeimoto',130);
+
+insert into trabalho.trajeto values (131,'10/01/2011',4);
+insert into trabalho.registo values (131, 390, '10/01/2011',1400, 1500);
+insert into trabalho.a_t values ('10/01/2011','Francisco Zeimoto',131);
+
+
+insert into trabalho.trajeto values (128,'10/01/2011',4);
+insert into trabalho.registo values (128, 304, '10/01/2011',1800,2200);
+insert into trabalho.a_t values ('10/01/2011','Francisco Zeimoto',128);
+
+insert into trabalho.ref_c values (127,1,1.66);
+insert into trabalho.ref_p values (127,2,6);
+insert into trabalho.ref_h values (127,4,69);
+
+insert into trabalho.ref_c values (130,0,0);
+insert into trabalho.ref_p values (130,1,6);
+insert into trabalho.ref_h values (130,2,69);
+
+insert into trabalho.ref_c values (131,0,0);
+insert into trabalho.ref_p values (131,1,6);
+insert into trabalho.ref_h values (131,2,69);
+
+insert into trabalho.ref_c values (128,1,1.66);
+insert into trabalho.ref_p values (128,2,6);
+insert into trabalho.ref_h values (128,4,69);
+
+
+a.
+select num_voo,origem,destino,hora_partida
+from voo
+where dia_semana like 'Domingo'
+
+b.
+select num_voo
+from voo natural inner join aviao
+where nomea like 'Nicolau Coelho'
+
+c.
+select nomea, max(autonomia) as a
+from aviao
+group by nomea
+order by a desc limit 1
+
+d.
+select num_voo,max(a)
+from (select count (bi) as a,num_voo
+      from tripulacao
+      group by tripulacao.num_voo) as t
+group by t.a,t.num_voo
+order by a desc limit 1
+
+e.
+select nomef,bi
+from (select nomef, bi, count(bi) as num_voo
+      from hospedeira natural inner join tripulacao natural inner join funcionarios
+      where hospedeira.bi = bi
+      group by hospedeira.bi,funcionarios.nomef) as a
+where num_voo = (select max(num_voo)
+      from (select bi, count(bi) as num_voo
+            from hospedeira natural inner join tripulacao
+            where hospedeira.bi = bi
+            group by hospedeira.bi) as b)
+
+	f.
+select num_voo
+from (select trajeto.num_voo, num_passageiros
+      from trajeto natural inner join registo
+      where data_r like '__/01/2011'
+      group by num_voo, num_passageiros) as a
+where num_passageiros = (select max(num_passageiros)
+      from (select num_voo, num_passageiros
+            from trajeto natural inner join registo
+            where data_t LIKE '__/01/2011'
+            group by num_voo, num_passageiros)as b)
+
+g.
+select num_trajeto,max(a)
+from (select num_trajeto,count (num_voo)as a
+      from voo natural inner join trajeto
+      group by voo.num_voo, trajeto.num_trajeto)as t
+group by t.a,t.num_trajeto
+order by a desc limit 1
+
+h.
+ select num_voo
+from voo natural inner join registo
+except
+select num_voo
+from voo natural inner join registo
+where hora_partida_exata <= hora_partida
+
+i.
+
+j.
+select tripulacao.num_voo,count(tripulacao.bi) as trip,registo.num_passageiros
+from tripulacao,registo
+where registo.num_voo=tripulacao.num_voo
+group by tripulacao.num_voo,registo.num_passageiros
+
+k.
+select num_voo,max(a)
+from (select num_voo,count (num_passageiros)as a
+      from voo natural inner join registo natural inner join trajeto
+      where trajeto.data_t like '__/01/____'
+      group by voo.num_voo, registo.num_passageiros)as t
+group by t.a, t.num_voo
+order by a desc limit 1
+
+l.

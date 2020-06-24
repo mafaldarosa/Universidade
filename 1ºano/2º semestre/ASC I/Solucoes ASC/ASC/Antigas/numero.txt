@@ -1,0 +1,13 @@
+14487
+pila
+
+ordem é
+
+conversão decimal/binário
+conversão decimal/hexadecimal
+intervalo de números usáveis
+overflow 
+binário
+memória
+
+estudar pseudo e movimento de dados load / store

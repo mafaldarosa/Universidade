@@ -1,0 +1,19 @@
+Xi'-Categoria 
+K- nr de categorias 
+n- dimensao da amostra 
+ni-frequencia absoluta simples 
+Ni-freq absoluta acumulada (n1, n1+n2, n1+n2+n3,...) 
+fi-freq relativa simples (ni/n) 
+Fi-freq relativa acumulada (Ni/n)(f1+f2+f3...)
+ 
+Um Outlier é um valor que se afasta de modo evidente do centro da 
+distribuição. 
+Outlier moderado 
+Xi < Q1 - 1,5xIQ 
+Xi > Q3 + 1,5xIQ 
+Severo 
+Xi < Q1 - 3xIQ 
+Xi > Q3 + 3xIQ 
+moderados sao representados por   'o'  e severos sao representados por  '*' 
+
+CAIXA DE BIGODES  apresenta algumas das principais caracteristicas descritivas de um certo conjunto de dados, numa img compacta. Econtram-se representados Q1, Q2, Q3, IQ, menor valor nao outlier, o maior valor nao outlier e os outliers. Fornece uma boa visualizacao da variabilidade dos dados do tipo da assimetria e achatamento da distribuicao. 

@@ -1,0 +1,234 @@
+Missões:
+
+
+
+converte_string:
+addi $sp,$sp, -4
+sw $ra,0($sp)
+addi $sp,$sp, -4
+sw $s0,0($sp)
+move $s0, $a0
+L1:
+lb $a0, 0($s0)
+jal converte_char
+nop
+sb $v0, 0($s0)
+bne $v0, $zero, L1
+addi $s0, $s0, 1
+lw $s0,0($sp)
+addi $sp,$sp, 4
+lw $ra,0($sp)
+addi $sp,$sp, 4
+jr $ra
+nop
+-----------------------
+absdiff:
+addi $sp,$sp,-4
+sw $ra,0($sp)
+sub $a0, $a0, $a1
+jal abs # calcula valor absoluto de a0
+nop
+sll $v0,$v0,1
+lw $ra,0($sp)
+addi $sp,$sp,4
+jr $ra
+nop
+------------------------
+ soma:
+addi $sp,$sp,-8
+sw $ra,0($sp)
+sw $t0,4($sp)
+
+move $v0, $zero
+beq $a1, $zero, L
+nop
+
+lw $t0, 0($a0)
+addi $a0, $a0, 4
+addi $a1, $a1, -1
+jal soma
+nop
+add $v0, $v0, $t0
+
+L:
+lw $ra,0($sp)
+addi $sp,$sp,4
+lw $t0,0($sp)
+addi $sp,$sp,4
+jr $ra
+nop
+--------------------------------
+
+
+
+
+Array:
+zahl:
+ori $v0, $zero, 0
+addi $sp, $sp, -4
+sw $s0, 0($sp)
+
+L:
+
+lb $s0, 0($a0)
+addi $a0, $a0, 1
+
+bne $s0, $a1, SKIP
+nop
+addi $v0, $v0, 1
+
+SKIP:
+bne $s0, $zero, L
+nop
+lw $s0, 0($sp)
+addi $sp, $sp, 4
+jr $ra
+nop
+-------------------------
+jal leap_year
+addi $a0, $a0, 1040
+j over
+nop
+
+leap_year:
+li $t0, 400
+div $a0, $t0
+mfhi $t1
+beq $t1, $zero, END
+addi $v0, $zero, 1
+
+li $t0, 4
+div $a0, $t0
+mfhi $t1
+seq $t1, $zero, $t1
+
+li $t0, 100
+div $a0, $t0
+mfhi $t2
+seq $t2, $zero, $t2
+
+blt $t2, $t1, END
+addi $v0, $zero, 1
+
+move $v0, $zero
+
+END:
+jr $ra
+nop
+
+over:
+nop
+
+-------------------------------------
+
+
+
+
+
+Ciclos:
+Summe:
+sub $t1 ,$a1,$a0
+addi $t1,$t1,1
+add $t4,$zero,$a0
+add $t2,$zero,$zero
+A:
+beq $t1 ,$zero,L
+nop
+add $t4,$t4,$t2
+add $t2 ,$zero ,$a0
+addi $t2, $t2,1
+addi $a0,$a0 ,1
+beq $zero,$zero, A
+addi $t1,$t1,-1
+L:
+add $v0, $zero, $t4
+jr $ra
+nop
+-------------------------
+
+
+
+
+Funções:
+max3:
+slt $t1,$a0,$a1
+beq $t1,$zero, L
+nop
+slt $t1, $a1,$a2
+beq $t1,$zero, P
+nop
+j T
+nop
+L:
+slt $t1,$a0,$a2
+beq $t1,$zero,V
+nop
+T:
+add $v0,$zero,$a2
+j End
+nop
+V:
+add $v0,$zero,$a0
+j End
+nop
+P:
+add $v0,$zero,$a1
+End:
+jr $ra
+nop
+
+------------------------------------
+sum3:
+add $v0,$a0,$a1
+add $v0,$v0,$a2
+jr $ra
+nop
+
+--------------------------------------
+abs:
+slt $t1 ,$a0,$zero
+bne $t1,$zero,L
+nop
+add $v0,$zero,$a0
+j Fim
+nop
+L:
+sub $v0,$zero,$a0
+Fim:
+jr $ra
+nop
+
+
+
+-----------------------------
+Recursiva
+
+factorial:
+	addi $sp, $sp,-8
+	sw $ra, 0($sp)
+	sw $s0, 4($sp)
+    
+	li $v0, 1
+	beq $a0, $zero, RETURN
+	nop
+	move $s0, $a0
+	addi $a0, $a0, -1
+	jal factorial   # chamada recursiva
+	nop
+	mul $v0, $v0, $s0
+RETURN:
+
+	lw $ra, 0($sp)
+  	lw $s0, 4($sp)
+  	addi $sp, $sp,8
+  	jr $ra
+  	nop
+
+----------------------------------
+
+registo de 7
+
+add $t1,$zero,$t0
+sll$t1,$t1,24
+srl $t1,$t1,31
+

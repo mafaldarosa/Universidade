@@ -1,0 +1,75 @@
+Foo: word -3 -2 -1 
+endereço acaba em 100
+ 
+Respostas certas: 
+
+-A funçao substitui os elementos de um array de inteiros de 32 bits pelos seus valores absolutos
+-A funçao nao é recursiva pois nao tem chamadas de funçao para ela propria
+-Codigo maquina 52bytes
+--A funçao nao tem valor de retorno
+--A funçao nao necessita de guardar o registo ra na pilha 
+- Para passar o array A como argumento, é necessário colocar os valores 0x10010000 e 6 nos registos $a0 e $a1, respectivamente.
+-A função não é recursiva, a instrução j foo não é uma chamada de função
+-Se a função for carregada em memória no endereço 0x00400100, a instrução jr $ra está no endereço 0x0040012c.
+--A função recebe o endereço do primeiro elemento e o comprimento do array como argumentos.
+
+--------------------------------------
+Foo: word -3 -2 -1 
+endereço acaba em 1000
+
+Respostas certas:
+-A funçao nao tem valor de retorno
+-A instrução jr $ra está no endereço de memória 0x0040102c.
+-A funçao nao necessita de guardar o registo ra na pilha 
+-A função não é recursiva, a instrução j foo não é uma chamada de função.
+-A função troca o sinal dos elementos positivos de um array de inteiros de 32 bits.
+-Para passar o array A como argumento, é necessário colocar os valores 0x10010000 e 6 nos registos $a0 e $a1, respectivamente.
+--Codigo maquina 52bytes
+-A função recebe o endereço do primeiro elemento e o comprimento do array como argumentos.
+-A função não é recursiva pois não tem chamadas de função para ela própria.
+
+
+-------------------------------------------------
+
+run:
+ Resposta certa:
+
+-Verifica se os números do array são negativos, e em caso afirmativo converte-os para positivos.
+-Converte os números negativos do array para positivos.
+
+
+--------------------------------------------------
+foo:
+-2 -1 0 1 2
+
+-O código máquina da função foo ocupa 52 bytes em memória.
+-Se a função for carregada em memória no endereço 0x00400100, a instrução jr $ra está no endereço 0x0040012c.
+-A função não tem valor de retorno.
+-A função inverte a ordem dos elementos de um array de inteiros.
+-A função não é recursiva.
+-A função não necessita de guardar o registo $ra na pilha.
+-A função recebe o endereço do primeiro elemento e o comprimento do array como argumentos.
+
+
+---------------------------------------------------------------
+foo:
+    addi $v0, $a0, 1
+
+Resposta certa
+
+-Calcula o comprimento de uma string sem contar com o carácter nulo.
+-Retorna o número de caracteres de uma string sem contar com o carácter nulo.
+
+
+----------------------------------------------------------------
+foo:
+    addi $v0, $a0, 0
+
+Resposta certa
+Calcula o número de bytes ocupados por uma string, incluindo o carácter nulo.
+
+----------------------------------------------------------------------
+
+Count_bits: 
+
+As que estao certa sao as duas funçoes maiores

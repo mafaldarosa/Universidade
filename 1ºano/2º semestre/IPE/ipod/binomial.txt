@@ -1,0 +1,7 @@
+X= número de sucessos em n experiências 
+de Bernoulli (todas independentes), com n 
+fixo à partida e p a probabilidade de sucesso 
+em cada experiência. 
+O nº de meninas (filhas) numa família com 5 
+filhos .
+O nº de pessoas com Rh positivo num conjunto de 10 indivíduos

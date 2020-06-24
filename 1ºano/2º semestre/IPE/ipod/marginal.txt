@@ -1,0 +1,6 @@
+prob marginais = Soma de colunas
+ 
+massa= marginal, em y^n 
+sendo que (o valor em (-1)) somado com (o valor 1) = FYy^2(1) e o valor em FYy(0) dá logo o valor final de FYy(o)^2.
+ 
+Convergencia= (x1 x Y1 x P1) + (...) (Xn x Yn x Pn)

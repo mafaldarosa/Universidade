@@ -1,0 +1,8 @@
+-AMPLITUDE TOTAL (range) -   a=max-min 
+-AMPLITUDE INTERQUARTIL-  IQ=Q3-Q1 
+-INTERVALO DE VARIACAO- Q'= P90-P10
+
+COEFICIENTE DE DISPERSAO 
+CD= s/(tracinho x) , 0=<CD=<1
+
+para valores de CV inferiores a 50 por cento, a media sera tanto mais representativa dos valores da amostra quanto menor for o valor do coeficiente. Valores de CV superiores a 50 por cento indicam uma baixa representatividade da media.

@@ -1,0 +1,4 @@
+40% instalar o ros e trabalhar nele e aprender os conceitos e os controlos
+60% continuar a aprender os controlos e começar a fazer virtualmente um robo que deteta os obstaculos, por exemplo aulas de conduçao na america.
+80% criaçao do robo
+100% criaçao dos objetos

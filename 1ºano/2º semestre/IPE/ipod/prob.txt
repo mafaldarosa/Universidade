@@ -1,0 +1,7 @@
+P(A ou B)= P(A)+P(B)+P(A e B)   (A e B n sao disjuntos) 
+P(A ou B)= P(A)+P(B)    (A e B sao disjuntos) 
+P(A|B)=P(A e B)/P(B)   (prob condicionada) 
+[P(A e B)=P(A|B).P(B)  OU =P(A).(P(B|A)] 
+P(A e B)=P(A).P(B)  (A e B sao ac independentes) 
+P(A e B)= P(A).P(B|A) ou =P(B).P(A|B)  (A e B nao sao indepentes) 
+P(B-A)=P(B)-P(A e B)

@@ -1,0 +1,377 @@
+Funções:
+
+absdiff:
+addi $sp,$sp,-4
+sw $ra,0($sp)
+sub $a0, $a0, $a1
+jal abs # calcula valor absoluto de a0
+nop
+sll $v0,$v0,1
+lw $ra,0($sp)
+addi $sp,$sp,4
+jr $ra
+nop
+
+-
+
+zahl:
+ori $v0, $zero, 0
+addi $sp, $sp, -4
+sw $s0, 0($sp)
+
+L:
+
+lb $s0, 0($a0)
+addi $a0, $a0, 1
+
+bne $s0, $a1, SKIP
+nop
+addi $v0, $v0, 1
+
+SKIP:
+bne $s0, $zero, L
+nop
+lw $s0, 0($sp)
+addi $sp, $sp, 4
+jr $ra
+nop
+
+-
+
+
+jal leap_year
+addi $a0, $a0, 1040
+j over
+nop
+
+leap_year:
+li $t0, 400
+div $a0, $t0
+mfhi $t1
+beq $t1, $zero, END
+addi $v0, $zero, 1
+
+li $t0, 4
+div $a0, $t0
+mfhi $t1
+seq $t1, $zero, $t1
+
+li $t0, 100
+div $a0, $t0
+mfhi $t2
+seq $t2, $zero, $t2
+
+blt $t2, $t1, END
+addi $v0, $zero, 1
+
+move $v0, $zero
+
+END:
+jr $ra
+nop
+
+over:
+nop
+
+
+-
+
+abs:
+slt $t1 ,$a0,$zero
+bne $t1,$zero,L
+nop
+add $v0,$zero,$a0
+j Fim
+nop
+L:
+sub $v0,$zero,$a0
+Fim:
+jr $ra
+nop
+
+-
+
+sum3:
+add $v0,$a0,$a1
+add $v0,$v0,$a2
+jr $ra
+nop
+
+-
+
+max3:
+slt $t1,$a0,$a1
+beq $t1,$zero, L
+nop
+slt $t1, $a1,$a2
+beq $t1,$zero, P
+nop
+j T
+nop
+L:
+slt $t1,$a0,$a2
+beq $t1,$zero,V
+nop
+T:
+add $v0,$zero,$a2
+j End
+nop
+V:
+add $v0,$zero,$a0
+j End
+nop
+P:
+add $v0,$zero,$a1
+End:
+jr $ra
+nop
+
+---------------------------------
+CICLOS:
+
+factorial:
+li $v0,1
+A:
+beq $a0,$zero,L
+nop
+mult $v0,$a0
+mflo $v0
+addi $a0,$a0,-1
+beq $zero,$zero,A
+nop
+L:
+jr $ra
+nop
+
+-
+
+Summe:
+sub $t1 ,$a1,$a0
+addi $t1,$t1,1
+add $t4,$zero,$a0
+add $t2,$zero,$zero
+A:
+beq $t1 ,$zero,L
+nop
+add $t4,$t4,$t2
+add $t2 ,$zero ,$a0
+addi $t2, $t2,1
+addi $a0,$a0 ,1
+beq $zero,$zero, A
+addi $t1,$t1,-1
+L:
+add $v0, $zero, $t4
+jr $ra
+nop
+
+--------------------------
+ARRAYS:
+
+strlen:
+    addi $v0,$zero,0
+    L:   
+    lb $t0,0($a0)
+    addi $a0,$a0,1
+    beq $t0,$zero , End
+    nop
+    addi $v0,$v0,1
+    beq $zero,$zero,L
+    nop
+    End:
+    jr $ra
+    nop
+
+
+
+
+------------------------
+load store:
+
+lw $t1,0($t0)
+sb $t1,3($t0)
+srl $t1,$t1,8
+sb $t1,2($t0)
+srl $t1,$t1,8
+sb $t1,1($t0)
+srl $t1,$t1,8
+sb $t1,0($t0)
+
+-------------------------
+MISSOES:
+
+converte_string:
+addi $sp,$sp, -4
+sw $ra,0($sp)
+addi $sp,$sp, -4
+sw $s0,0($sp)
+move $s0, $a0
+L1:
+lb $a0, 0($s0)
+jal converte_char
+nop
+sb $v0, 0($s0)
+bne $v0, $zero, L1
+addi $s0, $s0, 1
+lw $s0,0($sp)
+addi $sp,$sp, 4
+lw $ra,0($sp)
+addi $sp,$sp, 4
+jr $ra
+nop
+
+-
+
+soma:
+addi $sp,$sp,-8
+sw $ra,0($sp)
+sw $t0,4($sp)
+
+move $v0, $zero
+beq $a1, $zero, L
+nop
+
+lw $t0, 0($a0)
+addi $a0, $a0, 4
+addi $a1, $a1, -1
+jal soma
+nop
+add $v0, $v0, $t0
+
+L:
+lw $ra,0($sp)
+addi $sp,$sp,4
+lw $t0,0($sp)
+addi $sp,$sp,4
+jr $ra
+nop
+
+--------------------
+REGISTO 7:
+add $t1,$zero,$t0
+sll $t1,$t1,24
+srl $t1,$t1,31
+-------------------------
+Conta:  $t2= 2* $t1 + 3 * ($t0-$t1)
+sub $t3,$t0,$t1
+sll $t4,$t0,1
+addi $t5,$zero,3
+mult $t5, $t3
+mflo $t6
+add $t2,$t6,$t4
+
+--------------------------
+
+count_zeros: / count_ones:
+    add $v0,$zero,$zero
+    addi $t1,$zero,1
+    addi $t5,$zero,32
+    T:
+    beq $t5,$zero,End
+    nop
+    and $t0,$t1,$a0
+    srl $a0,$a0,1
+    addi $t5,$t5,-1
+    bne $t0,$t1,P   / beq  ## funçao count_Zeros e com bne funcao count_Ones e com beq
+    nop
+    beq $zero,$zero,T
+    nop
+    P:
+    addi $v0,$v0,1
+    beq $zero,$zero,T
+    nop
+    End:
+    jr $ra
+    nop
+
+--------------------------
+
+xor $t0,$t0,$t1
+xor$t1,$t0,$t1
+xor$t0,$t0,$t1
+
+
+swap_int:
+lw $t1,0($a0)
+lw $t0,0($a1)
+sw $t1,0($a1)
+sw $t0,0($a0)
+jr $ra
+nop
+---------------------------
+Recursiva
+
+factorial:
+	addi $sp, $sp,-8
+	sw $ra, 0($sp)
+	sw $s0, 4($sp)
+    
+	li $v0, 1
+	beq $a0, $zero, RETURN
+	nop
+	move $s0, $a0
+	addi $a0, $a0, -1
+	jal factorial   # chamada recursiva
+	nop
+	mul $v0, $v0, $s0
+RETURN:
+
+	lw $ra, 0($sp)
+  	lw $s0, 4($sp)
+  	addi $sp, $sp,8
+  	jr $ra
+  	nop
+
+
+
+
+
+preservados so-s7, gp, sp fp
+nao preservados t0-t9 a0-a3 v0-v1 ra at
+
+big endian 
+sw t3,0(t1)
+lbu t3,0(t1)              0000000000000000
+
+little endian
+sw t2,0(t0)
+lb t2,0(t0)           ffffffffffff
+
+little endian
+sw t7,0(t4)
+lbu t7,0(t4)     igual
+
+deslocamento 16 bits com sinal quando o deslocamento é somado ao registo 4....
+
+blt s,t,C       slt at,s,t    bne at,zero, C
+bgt s,t,c             slt at,t,s     bne at, zero, c
+bge s,t,c         slt at,s,t     beq at,zero,c
+ble s,t,c   slt at,t,s     beq at,zero,c
+
+t=ciclos/(frequencia*10^6)
+
+contagem de ciclo 1+(nmero string+1)*4+2
+
+texe=cont*t
+
+0 11111111 00000000000000000000000 +Inf
+1 11111111 00000000000000000000000 -Inf
+
+0 11111111 10000000000000000000000 +NaN
+1 11111111 10000000000000000000000 -NaN
+
+0 00000000 00000000000000000000000 +0.0
+1 00000000 00000000000000000000000 -0.0
+
+lui $t, C_hi
+ori $t, $t, C_lo
+
+mult $s, $t
+mflo $d
+
+quociente  
+div $s, $t
+mflo $d
+
+outro 
+div $s, $t
+mfhi $d

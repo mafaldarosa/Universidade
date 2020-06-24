@@ -1,0 +1,5 @@
+sem Wall
+gcc -o ex ex.c -lm
+
+com Wall
+gcc -Wall ex.c -o eda

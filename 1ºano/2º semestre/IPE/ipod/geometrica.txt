@@ -1,0 +1,10 @@
+X= número de experiências de Bernoulli até 
+ao primeiro sucesso (p é a probabilidade de 
+sucesso em cada experiência) 
+Y= número de insucessos até ao primeiro 
+sucesso (p é a probabilidade de sucesso em 
+cada experiência). Y= X-1 
+ex 
+Nº de vezes que uma pessoa estaciona num 
+certo local proibido até apanhar uma multa. 
+Nº de tentativas até acertar no alvo (jogo de tiroao alvo).

@@ -1,0 +1,10 @@
+Sempre que uma experiência aleatória só 
+tem dois resultados possíveis pode ser 
+descrita por uma variável aleatória de 
+Bernoulli. Por convenção utilizam-se os 
+valores 0 e 1 (0 ? insucesso, 1 ? sucesso) 
+e designa-se por p a probabilidade da 
+variável assumir o valor 1. 
+O sexo de um indivíduo; 
+ Pretende-se estudar a incidência de uma certa doença numa certa população. X pode indicar se a doença está presente (X=1) ou ausente (X=0) num indivíduo da população (seleccionado ao acaso). 
+ O factor Rh do sangue das pessoa (ou é positivo ou é negativo). 

@@ -1,0 +1,3 @@
+MEDIA (MEAN)= (somatorio)i=1 ^100/n = sum/n=6998.03 logo, em media, o nr de ciclos de carregamentos da bateria ate a perda da capacidade observados foi de 6998 ciclos 
+MEDIANA (MEDIAN)= P50=6990.05 logo em 50 por cento das observacoes o nr de ciclos de carregamentos de bateria ate a perda total da capacidade foi inferior ou igual a 6990.5 e nas restantes foi superior ou igual a 6990.5 ciclos 
+S(desvio padrao)=92.353 logo o desvio tipico em relacao a media do nr de ciclos de carregamentos da bateria ate a perda total da capacidade e de 92.353 ciclos

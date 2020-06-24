@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/web/jsp/Perfil.jsp</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/database/DataBaseLogic.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/RegistServlet.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/PropretiesGetter.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/GoToHome.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/web/jsp/index.jsp</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/logout.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/ShowEntries.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/DeleteEntry.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/database/DataBaseManager.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/RegistEdit.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/SearchAllergyTypes.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/web/jsp/LoggedInMenu.jsp</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/LoginServlet.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/web/jsp/NotLoggedInMenu.jsp</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/usables/User.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/showMarkersFromCheckbox.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/web/jsp/TopMenuPerfil.jsp</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/showChoosenLocal.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/InfoBD.properties</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/GoToPerfil.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/RegistEntry.java</file>
+            <file>file:/C:/Users/danas/Desktop/trabalho2_so2_FINAL/src/java/servlets/DeleteEntries.java</file>
+        </group>
+    </open-files>
+</project-private>

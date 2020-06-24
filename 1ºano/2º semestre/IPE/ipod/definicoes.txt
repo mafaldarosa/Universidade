@@ -1,0 +1,9 @@
+HISTOGRAMA grafico de barras que se constroi escolhendo para abcissas os limites de cada uma das classes e para ordenadas, resultando na altura de cada uma das barras 
+que o constitui, a freq (absoluta ou relativa) dos dados na classe correspondente. 
+POLIGONO DE FREQ e obtido unindo os pontos da ordenada correspondente de cada barra e abcissa dada pelo respetivo ponto medio da classe, os polignos de freq sao 
+usualmente melhores que os histogramas para comparar a forma de 2 ou mais dist de freq. 
+POLIGONO DE FREQ ACUMULADAS obtem-se unindo os pontos formados por ordenadas dadas pela altura das barras do histograma e respetivas abcissas que sao um dos limites da classe que lhe corresponde-caso seja o superior fala-se de dist acumulada 'acima de', se for o inferior temos dist acumulada 'abaixo de'. a curva aqui  resultante toma o nome de OGIVA. e uma cuva imptt quando estamos interessados em determinar q percentagem dos dados esta abaixo de um certo valor. 
+
+DIAGRAMA DA CAIXA DE BIGODES para construir este diagrama temos de conhecer quanto valem o maximo e o minimo dos dados, a sua mediana e o Q1 e Q3. 
+com estes desenha-se uma caixa retangular em q o topo inferior e dado por Q1 e o superior por Q3. a caixa e dividida em 2 partes pelo valor da mediana dos dados. 
+acrescentam-se-lhe entao 2 bigodes q partem, respetivamente, um do extremo inferior da caixa ate ao minimo dos dados  e o outo do extremo superior para o maximo 
